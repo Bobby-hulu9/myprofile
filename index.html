@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobby Agung Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: fixed;
+            width: 100%;
+            background: #fff;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background: #222;
+            color: #fff;
+        }
+        
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000000;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #000;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #000000;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                flex-direction: column;
+                background: #fff;
+                width: 200px;
+                display: none;
+            }
+        
+            .nav-links.active {
+                display: flex;
+            }
+        
+            .hamburger {
+                display: block;
+            }
+        }
+        
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            background: linear-gradient(to right, #000000, #ffffff);
+            color: white;
+        }
+
+        .hero-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border: 5px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+        }
+        
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .hero-btns a {
+            padding: 10px 20px;
+            background: white;
+            color: #000000;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        
+        .hero-btns a:hover {
+            background: #ddd;
+        }
+        
+        .scroll-down {
+            margin-top: 40px;
+            cursor: pointer;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2rem;
+            color: #000000;
+        }
+
+        .section-title p {
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        /* Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .skills-category {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .skills-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #000000;
+        }
+        
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .skill-bar {
+            background: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: #000000;
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+        
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #000000;
+            color: white;
+            padding: 12px;
+            border-radius: 50%;
+            display: none;
+            cursor: pointer;
+            z-index: 999;
+        }
+        
+        .back-to-top.active {
+            display: block;
+        }
+        
+        /* Footer */
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 40px 10%;
+            text-align: center;
+        }
+        
+        .footer-links, .footer-social {
+            margin: 15px 0;
+        }
+        
+        .footer-links a, .footer-social a {
+            margin: 0 10px;
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover, .footer-social a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* About, Contact, Education, etc - Layout dasar */
+        .container {
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        .about-content, .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .about-img img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-text, .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text h3 {
+            margin-bottom: 20px;
+            color: #000000;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .personal-info {
+            margin: 25px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #333;
+        }
+
+        /* Education */
+        .education-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .profile-photo {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .education-timeline {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .edu-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 4px solid #000000;
+        }
+
+        .edu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .edu-item h3 {
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .edu-item span {
+            background: #000000;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .edu-item p {
+            color: #000000;
+            font-weight: 500;
+            margin: 5px 0 15px 0;
+        }
+
+        .edu-item ul {
+            padding-left: 20px;
+            color: #555;
+        }
+
+        .edu-item li {
+            margin-bottom: 8px;
+        }
+
+        /* Projects */
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            color: #2c3e50;
+            margin: 0;
+        }
+
+        .project-card .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .project-card span {
+            background: #000000;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-content p {
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tech {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tech span {
+            background: #f1f8ff;
+            color: #000000;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .project-links a {
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .project-links a:first-child {
+            background: #000000;
+            color: white;
+        }
+
+        .project-links a:last-child {
+            background: white;
+            color: #000000;
+            border: 1px solid #000000;
+        }
+
+        .project-links a:hover {
+            opacity: 0.9;
+        }
+
+        /* Hobbies */
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hobby-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.08);
+            text-align: center;
+            padding: 30px 20px;
+            transition: transform 0.3s;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hobby-icon {
+            width: 80px;
+            height: 80px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .hobby-card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .hobby-card p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Contact */
+        .contact-info h3, .contact-form h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info .info-item {
+            margin: 15px 0;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .about-content, .contact-container, .education-container {
+                flex-direction: column;
+            }
+            
+            .profile-photo {
+                margin: 0 auto;
+            }
+            
+            .projects-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="profil2.jpg" alt="Logo Bobby" class="logo-avatar">
+            Bobby Agung
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#skills">Keahlian</a></li>
+            <li><a href="#education">Pendidikan</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#hobbies">Hobi</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <img src="profil2.jpg" alt="Bobby Agung" class="hero-avatar">
+        <h1>Bobby Agung Berkat Hulu</h1>
+        <p>Mahasiswa Teknik Komputer | Web Developer | Pecinta Teknologi</p>
+        <div class="hero-btns">
+            <a href="#projects">Proyek Saya</a>
+            <a href="#contact">Hubungi Saya</a>
+        </div>
+        <div class="scroll-down" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+</body>
+</html>
+
+            <div
+            <!-- Tentang -->
+            <section id="about">
+                <div class="section-title">
+                    <h2>Tentang Saya</h2>
+               
+                    <div class="about-text">
+                        <h3>Mahasiswa Teknik Komputer yang Berpassion di Bidang Teknologi</h3>
+                        <p>
+                            Halo! Saya Bobby Agung Berkat Hulu, seorang mahasiswa semester 4 di Politeknik Negeri Medan, 
+                            jurusan Teknik Komputer dan Informatika. Saya memiliki ketertarikan yang besar di bidang 
+                            teknologi, khususnya dalam pengembangan web dan pemrograman.
+                        </p>
+                        <p>
+                            Selama menempuh pendidikan, saya telah mempelajari berbagai konsep dasar komputer, jaringan, 
+                            dan pemrograman. Saya terus mengasah kemampuan teknis saya baik melalui perkuliahan maupun 
+                            pembelajaran mandiri.
+                        </p>
+                        <p>
+                            Selain akademik, saya aktif mengikuti berbagai workshop dan seminar teknologi untuk 
+                            memperluas wawasan dan jaringan profesional saya. Saya percaya bahwa kombinasi antara 
+                            pengetahuan teoritis dan praktik langsung adalah kunci untuk menjadi profesional yang kompeten.
+                        </p>
+                        <div class="personal-info">
+                            <div class="info-item">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Pendidikan: Politeknik Negeri Medan</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-book"></i>
+                                <span>Jurusan: Teknik Komputer dan Informatika</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-layer-group"></i>
+                                <span>Semester: 4</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Lokasi: Medan, Sumatera Utara</span>
+                            </div>
+                        </div>
+                        <a href="#contact" class="btn">Hubungi Saya</a>
+                    </div>
+                </div>
+            </section>
+            <!-- Keahlian -->
+<section id="skills">
+    <div class="section-title">
+        <h2>Keahlian Saya</h2>
+    </div>
+    <div class="container skills-container">
+        <!-- Front-end Development -->
+        <div class="skills-category">
+            <h3><i class="fas fa-laptop-code"></i> Front-end Development</h3>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>HTML5</span>
+                    <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>CSS3</span>
+                    <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>JavaScript</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>React.js</span>
+                    <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Bootstrap</span>
+                    <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Web Development -->
+        <div class="skills-category">
+            <h3><i class="fas fa-globe"></i> Web Development</h3>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Responsive Design</span>
+                    <span>88%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 88%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>UI/UX Design</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Git Version Control</span>
+                    <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>RESTful APIs</span>
+                    <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 70%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Node.js (Basic)</span>
+                    <span>65%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 65%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tools & Lainnya -->
+        <div class="skills-category">
+            <h3><i class="fas fa-tools"></i> Tools & Lainnya</h3>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>VS Code</span>
+                    <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Figma</span>
+                    <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 80%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>GitHub</span>
+                    <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 85%;"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-info">
+                    <span>Adobe Photoshop</span>
+                    <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Pendidikan -->
+<section id="education" style="background-color: #f5f7fa; padding: 80px 0;">
+    <div class="section-title">
+        <h2 style="color: #000000;">Riwayat Pendidikan</h2>
+        <p style="color: #7f8c8d;">Perjalanan akademik saya</p>
+    </div>
+    
+    <div class="education-container" style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: 40px;">
+        <!-- Foto Profil -->
+        <div class="profile-photo" style="flex: 1; min-width: 300px; max-width: 400px; text-align: center;">
+            <img src="profil2.jpg" alt="Bobby Agung" style="width: 100%; max-width: 300px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 5px solid white;">
+            <h3 style="margin-top: 20px; color: #a9a9a9;">Bobby Agung Berkat Hulu</h3>
+            <p style="color: #7f8c8d;">Mahasiswa Teknik Komputer</p>
+        </div>
+        
+        <!-- Timeline Pendidikan -->
+        <div class="education-timeline" style="flex: 2; min-width: 300px;">
+            <!-- Politeknik -->
+            <div class="edu-item" style="background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #3498db;">
+                <div class="edu-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="color: #2c3e50; margin: 0;">Politeknik Negeri Medan</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">2023 - Sekarang</span>
+                </div>
+                <p style="color: #3498db; font-weight: 500; margin: 5px 0 15px 0;">D3 Teknik Komputer & Informatika</p>
+                <ul style="padding-left: 20px; color: #555;">
+                    <li style="margin-bottom: 8px;">Semester 4 (Sedang Berjalan)</li>
+                    <li style="margin-bottom: 8px;">Fokus pada Web Development & Jaringan</li>
+                </ul>
+            </div>
+            
+            <!-- SMA -->
+            <div class="edu-item" style="background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #e74c3c;">
+                <div class="edu-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="color: #2c3e50; margin: 0;">SMA Negeri 1 Pangkalan Susu</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">2020 - 2023</span>
+                </div>
+                <p style="color: #000000; font-weight: 500; margin: 5px 0 15px 0;">Jurusan IPA</p>
+                <ul style="padding-left: 20px; color: #555;">
+                    <li style="margin-bottom: 8px;">Lulus dengan nilai memuaskan</li>
+                </ul>
+            </div>
+            
+            <!-- SMP -->
+            <div class="edu-item" style="background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #f39c12;">
+                <div class="edu-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="color: #2c3e50; margin: 0;">SMP Negeri 1 Pangkalan Susu</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">2017 - 2020</span>
+                </div>
+                <ul style="padding-left: 20px; color: #555;">
+                    <li style="margin-bottom: 8px;">Mulai tertarik di bidang teknologi</li>
+                </ul>
+            </div>
+            
+            <!-- SD -->
+            <div class="edu-item" style="background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border-left: 4px solid #2ecc71;">
+                <div class="edu-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="color: #2c3e50; margin: 0;">SD Dharma Patra Pangkalan Susu</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">2011 - 2017</span>
+                </div>
+                <ul style="padding-left: 20px; color: #555;">
+                    <li style="margin-bottom: 8px;">Pendidikan dasar</li>
+                    <li style="margin-bottom: 8px;">Senang bermain game edukasi</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Proyek -->
+<section id="projects" style="padding: 80px 0; background-color: #f9f9f9;">
+    <div class="section-title">
+        <h2 style="color: #2c3e50;">Proyek Saya</h2>
+        <p style="color: #7f8c8d;">Karya dan project yang telah saya kerjakan</p>
+    </div>
+
+    <div class="projects-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px;">
+        <!-- Proyek Coffee Shop -->
+        <div class="project-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+            <div class="project-image" style="height: 200px; overflow: hidden;">
+                <img src="coffeeshop.jpg" alt="Cofefe Shop" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            </div>
+            <div class="project-content" style="padding: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #2c3e50; margin: 0;">Coffee Shop</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Team Project</span>
+                </div>
+                <p style="color: #555; margin-bottom: 20px;">Website e-commerce untuk kedai kopi lokal yang dibuat bersama tim di kampus. Fitur utama termasuk katalog produk, keranjang belanja, dan sistem pemesanan.</p>
+                <div class="project-tech" style="margin-bottom: 20px;">
+                    <span style="display: inline-block; background: #f1f8ff; color: #000000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 8px;">HTML/CSS</span>
+                    <span style="display: inline-block; background: #f1f8ff; color: #000000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 8px;">JavaScript</span>
+                    <span style="display: inline-block; background: #f1f8ff; color: #000000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 8px;">PHP</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" style="display: inline-block; background: #000000; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; margin-right: 10px; font-size: 0.9rem;">Demo</a>
+                    <a href="#" style="display: inline-block; background: white; color: #000000; padding: 8px 15px; border-radius: 5px; text-decoration: none; border: 1px solid #3498db; font-size: 0.9rem;">Source Code</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proyek Website Pribadi -->
+        <div class="project-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+            <div class="project-image" style="height: 200px; overflow: hidden;">
+                <img src="project.png" alt="Website Pribadi" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s;">
+            </div>
+            <div class="project-content" style="padding: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #2c3e50; margin: 0;">Portfolio Pribadi</h3>
+                    <span style="background: #000000; color: white; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem;">Personal Project</span>
+                </div>
+                <p style="color: #555; margin-bottom: 20px;">Website portfolio pribadi untuk menampilkan karya, kemampuan, dan pengalaman profesional. Dibangun dengan pendekatan modern dan responsive design.</p>
+                <div class="project-tech" style="margin-bottom: 20px;">
+                    <span style="display: inline-block; background: #f1f8ff; color: #000000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 8px;">HTML</span>
+                    <span style="display: inline-block; background: #f1f8ff; color: #000000; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; margin-right: 8px; margin-bottom: 8px;">CSS</span>
+                </div>
+                <div class="project-links">
+                    <a href="#" style="display: inline-block; background: #000000; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; margin-right: 10px; font-size: 0.9rem;">Live View</a>
+                    <a href="#" style="display: inline-block; background: white; color: #000000; padding: 8px 15px; border-radius: 5px; text-decoration: none; border: 1px solid #2ecc71; font-size: 0.9rem;">GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Proyek Tambahan (Opsional) -->
+        <div class="project-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1); transition: transform 0.3s;">
+            <div class="project-image" style="height: 200px; overflow: hidden; background: #f1f8ff; display: flex; align-items: center; justify-content: center;">
+                <i class="fas fa-plus" style="font-size: 3rem; color: #000000;"></i>
+            </div>
+            <div class="project-content" style="padding: 25px; text-align: center;">
+                <h3 style="color: #2c3e50; margin-bottom: 15px;">Proyek Selanjutnya</h3>
+                <p style="color: #555; margin-bottom: 20px;">Sedang mengerjakan proyek baru yang akan segera diluncurkan!</p>
+                <div class="project-links">
+                    <a href="#contact" style="display: inline-block; background: #000000; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9rem;">Hubungi Saya</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Hobi -->
+<section id="hobbies" style="padding: 80px 0; background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);">
+    <div class="section-title">
+        <h2 style="color: #2c3e50;">Hobi & Minat Saya</h2>
+        <p style="color: #7f8c8d;">Aktivitas yang saya nikmati di waktu luang</p>
+    </div>
+
+    <div class="hobbies-container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+        <!-- Futsal -->
+        <div class="hobby-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08); text-align: center; padding: 30px 20px; transition: transform 0.3s;">
+            <div class="hobby-icon" style="width: 80px; height: 80px; background: #030303; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem;">
+                <i class="fas fa-futbol"></i>
+            </div>
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Futsal</h3>
+            <p style="color: #555; line-height: 1.6;">Saya sangat menikmati bermain futsal setiap akhir pekan bersama teman-teman. Olahraga ini membantu saya menjaga kebugaran dan melatih kerja sama tim.</p>
+        </div>
+
+        <!-- Billiard -->
+        <div class="hobby-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08); text-align: center; padding: 30px 20px; transition: transform 0.3s;">
+            <div class="hobby-icon" style="width: 80px; height: 80px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem;">
+                <i class="fas fa-8"></i>
+            </div>
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Billiard</h3>
+            <p style="color: #555; line-height: 1.6;">Bermain billiard adalah cara saya melatih konsentrasi dan strategi. Saya sering bermain dengan teman untuk mengisi waktu luang.</p>
+        </div>
+
+        <!-- Bermain Gitar -->
+        <div class="hobby-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08); text-align: center; padding: 30px 20px; transition: transform 0.3s;">
+            <div class="hobby-icon" style="width: 80px; height: 80px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem;">
+                <i class="fas fa-guitar"></i>
+            </div>
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Bermain Gitar</h3>
+            <p style="color: #555; line-height: 1.6;">Saya suka bermain gitar akustik untuk mengekspresikan kreativitas musik. Terkadang saya juga membuat cover lagu favorit.</p>
+        </div>
+
+        <!-- Ngoding -->
+        <div class="hobby-card" style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 25px rgba(0,0,0,0.08); text-align: center; padding: 30px 20px; transition: transform 0.3s;">
+            <div class="hobby-icon" style="width: 80px; height: 80px; background: #000000; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: white; font-size: 2rem;">
+                <i class="fas fa-code"></i>
+            </div>
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Ngoding</h3>
+            <p style="color: #555; line-height: 1.6;">Selain sebagai profesi, ngoding adalah hobi saya. Saya senang mengeksplorasi teknologi baru dan membuat proyek-proyek kecil.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+        <p style="color: #7f8c8d; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+            "Hobi-hobi ini membantu saya menyeimbangkan antara kehidupan profesional dan pribadi, serta mengembangkan berbagai aspek kemampuan baik fisik, kreativitas, maupun logika."
+        </p>
+    </div>
+</section>
+<!-- Kontak -->
+<section id="contact">
+    <div class="section-title">
+        <h2>Hubungi Saya</h2>
+        <p>Silakan hubungi saya melalui WhatsApp atau media sosial lainnya</p>
+    </div>
+    <div class="container contact-container">
+        <div class="contact-info">
+            <h3><i class="fas fa-phone-alt"></i> Kontak Langsung</h3>
+            <div class="info-item">
+                <i class="fab fa-whatsapp"></i>
+                <span>
+                    <a href="https://wa.me/08887354214" target="_blank" style="color: #000000; text-decoration: none;">
+                        08887354214(WhatsApp)
+                    </a>
+                </span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <span>
+                    <a href="mailto:bobahulu@gmail.com" style="color: #000000; text-decoration: none;">
+                        bobahulu@gmail.com
+                    </a>
+                </span>
+            </div>
+            <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Medan, Sumatera Utara</span>
+            </div>
+
+            <h3 style="margin-top: 50px;"><i class="fas fa-share-alt"></i> Media Sosial</h3>
+            <div class="footer-social">
+                <a href="https://github.com/Bobby-hulu9" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/Bobby Agung Berkat Hulu
+" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com/bobbyhulu10" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+      
+</section>
